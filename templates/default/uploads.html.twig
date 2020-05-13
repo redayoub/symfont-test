@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Status</th>
+            <th>Errors</th>
+            <th>Upload date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for upload in uploads %}
+        <tr>
+            <td>{{ upload.id }}</td>
+            <td>
+                {% if upload.status == 0 %}
+                    <span class="badge badge-warning">Pending</span>
+                {% elseif upload.status == 1 %}
+                    <span class="badge badge-success">Processed</span>
+                {% elseif upload.status == 2 %}
+                    <span class="badge badge-danger">Failed</span>
+                {% endif %}
+            </td>
+            <td>
+                {% for error in upload.errors %}
+                    {{ error }}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {{ upload.createdAt | date }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

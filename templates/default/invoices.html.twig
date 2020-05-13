@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Invoice ID</th>
+            <th>Selling price</th>
+            <th>Due on</th>
+            <th>Upload date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.id }}</td>
+            <td>{{ invoice.invoiceId }}</td>
+            <td>{{ invoice.sellingPrice }}</td>
+            <td>{{ invoice.dueOn | date('Y-m-d') }}</td>
+            <td>{{ invoice.createdAt | date('Y-m-d') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
